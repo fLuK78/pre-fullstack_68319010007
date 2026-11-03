@@ -53,14 +53,18 @@ exports.updateStudent = async (req, res) => {
     const { id } = req.params;
     const { name, age, major } = req.body;
 
+    if (!name || !age || !major) {
+      return res.status(400).json({ message: 'Please Field Information' });
+    }
+
     const updatedStudent = await prisma.student.update({
       where: { id: Number(id) },
-      data: { name, age, major },
+      data: { name, age: Number(age), major },
     });
 
-    res.json(updatedStudent);
+    res.status(200).json(updatedStudent);
   } catch (error) {
-    res.status(404).json({ error: "ไม่พบข้อมูลเทพเจ้าที่ต้องการแก้ไข" });
+    res.status(404).json({ message: 'Fail' });
   }
 };
 
@@ -72,8 +76,8 @@ exports.deleteStudent = async (req, res) => {
       where: { id: Number(id) },
     });
 
-    res.json({ message: `ลบเทพเจ้าคนนี้ ${id} สำเร็จ` });
+    res.status(200).json({ message: `ลบนักศึกษารหัส ${id} สำเร็จ` });
   } catch (error) {
-    res.status(404).json({ error: "ไม่พบข้อมูลเทพเจ้าที่ต้องการลบ" });
+    res.status(404).json({ message: "Fail" });
   }
 };
