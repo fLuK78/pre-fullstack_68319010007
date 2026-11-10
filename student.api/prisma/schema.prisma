@@ -21,3 +21,17 @@ model Student {
   createdAt   DateTime     @default(now())
 }
 
+model Subject {
+  id          Int      @id @default(autoincrement())
+  subjectCode String   @unique @db.VarChar(20)
+  subjectName String   @db.VarChar(100)
+  objective   String   @db.Text
+  description String   @db.Text
+  theory      Float
+  practice    Float
+  credit      Float
+  teacher     String   @db.VarChar(100)
+  createdAt   DateTime @default(now())
+}
+
+
