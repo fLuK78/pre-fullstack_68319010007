@@ -14,9 +14,19 @@ datasource db {
 }
 
 model Student {
-  id           Int      @id @default(autoincrement())
-  name         String   @db.VarChar(50)
-  age          Int
-  major        String   @db.VarChar(50)
-  createDAt   DateTime  @default(now())
-} 
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(50)
+  age       Int
+  major     String   @db.VarChar(50)
+  createdAt DateTime @default(now())
+}
+
+model Subject {
+  id            Int      @id @default(autoincrement())
+  SubjectCode   String   @unique
+  Subjectname   String
+  objective     String   @db.Text
+  description   String   @db.Text
+  credit        String
+  teacher       String
+}
